@@ -3,6 +3,7 @@
 var express = require('express');
 var kraken = require('kraken-js');
 var db = require('./lib/db');
+var expressValidator = require('express-validator');
 
 var options, app;
 
@@ -23,6 +24,25 @@ options = {
 
 app = module.exports = express();
 app.use(kraken(options));
+
+// copy from the github page of express-validator
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
 app.on('start', function () {
     console.log('Application ready to serve requests.');
     console.log('Environment: %s', app.kraken.get('env:env'));
