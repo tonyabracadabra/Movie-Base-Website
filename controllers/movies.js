@@ -9,19 +9,18 @@ module.exports = function (router) {
 
     router.get('/', function (req, res) { 
     // {} means find everything 
-    Movie.find({}, function(err, movies) {
-    	if (err) {
-    		res.send(err);
-    	}
+	    Movie.find({}, function(err, movies) {
+	    	if (err) {
+	    		res.send(err);
+	    	}
 
-    	// everything we want to pass here
-    	var model = {
-    		movies: movies
-    	}
+	    	// everything we want to pass here
+	    	var model = {
+	    		movies: movies
+	    	}
 
-    	res.render('movies', model);
-    })     
-        res.render('movies', model);        
+	    	res.render('movies', model);
+	    });     
     });
 
     // add movie form, just like in regular express
