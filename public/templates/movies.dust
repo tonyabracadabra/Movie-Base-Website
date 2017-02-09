@@ -1,5 +1,15 @@
 {>"layouts/master" /}
 
 {<body}
-    <h1>{@pre type="content" key="greeting"/}</h1>
+	{#movies}
+		<div>
+			<img src="{.cover}">
+			<h3>{.title}<h3>
+			<a class="button" href="/movies/details/{._id}">Movies Info</a>
+		</div>
+		{! if no movies comes here !}
+		{:else}
+		<p>No movies are found!</p>
+	{/movies}
+	
 {/body}
